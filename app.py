@@ -4,6 +4,7 @@ from PIL import Image
 
 from face_mesh_for_static_image import detect_faces
 
+
 st.title('Face Recognition using MediaPipe')
 with open("style.css") as f:
     st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
@@ -11,7 +12,7 @@ with open("style.css") as f:
 st.sidebar.title('Face Recognition Sidebar')
 st.sidebar.subheader('Parameters')
 
-app_mode = st.sidebar.selectbox('Choose the app mode', ['Run on Image', 'Run on Video'])
+app_mode = st.sidebar.selectbox('Choose the app mode', ['Run on Image', 'Run on WebCam'])
 
 if app_mode == 'Run on Image':
     st.markdown('''**Detect Faces**''')
