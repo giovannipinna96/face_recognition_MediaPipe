@@ -3,7 +3,7 @@ import streamlit as st
 from PIL import Image
 
 from face_mesh_for_static_image import detect_faces
-
+from fece_mesh_for_webcam import detect_web_cam
 
 st.title('Face Recognition using MediaPipe')
 with open("style.css") as f:
@@ -12,7 +12,7 @@ with open("style.css") as f:
 st.sidebar.title('Face Recognition Sidebar')
 st.sidebar.subheader('Parameters')
 
-app_mode = st.sidebar.selectbox('Choose the app mode', ['Run on Image', 'Run on WebCam'])
+app_mode = st.sidebar.selectbox('Choose the app mode', ['Run on Image', 'Run on WebCam', 'Run on video'])
 
 if app_mode == 'Run on Image':
     st.markdown('''**Detect Faces**''')
@@ -37,6 +37,30 @@ if app_mode == 'Run on Image':
             n_faces_detect.write("Not found faces try to change parameters or try to change photo")
     else:
         st.text('Please upload an image in the Sidebar')
+
+elif app_mode == 'Run on WebCam':
+    st.markdown('''**Detect Faces**''')
+    n_faces_detect = st.markdown('0')
+    n_faces = 0
+    max_faces = st.sidebar.number_input('Maximum number of faces', value=1, min_value=1, max_value=20)
+
+    st.markdown("### Webcam Live Feed")
+    run = st.checkbox('Run')
+    FRAME_WINDOW = st.image([])
+    force_stop = 4
+    while run:
+        frame, n_faces_img = detect_web_cam(max_faces, n_faces)
+        if frame is not None and n_faces_img != 0:
+            n_faces_detect.write(f"<h1 class='nfaces'>{n_faces_img}</h1>", unsafe_allow_html=True)
+            FRAME_WINDOW.image(frame)
+        else:
+            st.text(f'Change parameter I can not detect nothing you have {force_stop - 1}')
+            force_stop -= 1
+            if force_stop == 0:
+                run = False
+                FRAME_WINDOW.image([])
+    else:
+        st.write('Stopped')
 
 else:
     pass
