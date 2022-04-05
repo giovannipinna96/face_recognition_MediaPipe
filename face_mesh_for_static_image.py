@@ -6,8 +6,8 @@ mp_drawing_styles = mp.solutions.drawing_styles
 
 
 def detect_faces(image, max_num_faces, min_detection_confidence, n_faces_detect):
-    drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
     try:
+        #drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
         with mp_face_mesh.FaceMesh(
                 static_image_mode=True,
                 max_num_faces=max_num_faces,
