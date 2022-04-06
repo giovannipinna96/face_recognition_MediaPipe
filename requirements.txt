@@ -1,5 +1,5 @@
-ÿþmediapipe==0.8.9.1
-opencv-contrib-python==4.5.5.64
-opencv-python==4.5.5.64
-Pillow==9.1.0
-streamlit==1.8.1ýÿ
+opencv-contrib-python-headless
+streamlit==0.81.1
+streamlit_webrtc==0.20.0
+mediapipe
+Pillow
